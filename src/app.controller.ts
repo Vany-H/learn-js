@@ -1,13 +1,14 @@
 import { Controller, Get } from "@nestjs/common";
-import { AppProviders } from "./app.providers";
+// import { AppProviders } from "./app.providers";
 
 @Controller('/api/v1')
 export class AppContrller{
     
-    constructor(private AppProviders:AppProviders){}
+    // constructor(private AppProviders:AppProviders){}
 
-    @Get()
+    @Get("/getData")
     getUsers(){
-        return 
+        // return this.AppProviders.getData()
+        return "data";
     }
 }

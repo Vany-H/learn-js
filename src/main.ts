@@ -7,3 +7,5 @@ async function start() {
 
   await app.listen(port, ()=> {console.log(`server listing ${port}`)});
 }
+
+start();
