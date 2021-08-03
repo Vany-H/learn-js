@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class AppProviders{
+export class AppService{
 
     getData(){
         return 'data';
