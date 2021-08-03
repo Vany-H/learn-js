@@ -14,7 +14,8 @@ import { AppService } from "./app.providers";
             username: 'postgres',
             password: 'example',
             database: 'postgres',
-            models:[]
+            models:[],
+            // autoLoadModels: true
         })
     ]
 })
