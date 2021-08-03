@@ -1,11 +1,7 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { AppContrller } from "./app.controller";
-import { AppService } from "./app.providers";
 
 @Module({
-    controllers: [AppContrller],
-    providers: [AppService],
     imports: [
         SequelizeModule.forRoot({
             dialect: "postgres",
