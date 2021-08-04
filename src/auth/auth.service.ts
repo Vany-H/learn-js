@@ -37,9 +37,10 @@ export class AuthService {
     private async validateDataUser(userDto:AuthsLoginDto){
 
         const user = await this.userServise.getUserEmail(userDto.email)
+        if(!!user.banStatus) throw new HttpException(`You was banned, about reson ${user.banReson}`, HttpStatus.FORBIDDEN);
         const checkPassword = await bcrypt.compare(userDto.password, user.password);
 
         if(!!user && !!checkPassword) return user;
-        else throw new UnauthorizedException({message:"Uncorect password or email"})
+        else throw new UnauthorizedException({message:"Uncorect password or email"});
     }
 }

@@ -17,13 +17,18 @@ export class JwtAuthGuard implements CanActivate{
             if(!bearer || bearer !== "Bearer" || !token){
                 throw new UnauthorizedException({message:"User nauthorization"});
             }
-
+            
             const user = this.jwtService.verify(token);
             request.user = user;
+
+            console.log(user)
+            if(user.roles[0].value !== "admin"){
+                throw new UnauthorizedException({message:"ADMIN"});
+            }
+
             return true;
         } catch{
             throw new UnauthorizedException({message:"User nauthorization"});
         }
     }
-
 }
