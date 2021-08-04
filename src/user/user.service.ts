@@ -44,7 +44,15 @@ export class UserService {
     async setUserRole(setRoleUser:SetRoleUser){
         const user = await this.userModel.findOne({where:{email:setRoleUser.email}});
         const role = await this.roleService.roleWhatNeed(setRoleUser.role);
-        await user.$set('roles', [role[0].id]);
+        await user.$add('roles', [role[0].id]);
+        user.roles = role;
+        return user;
+    }
+
+    async deletUserRole(setRoleUser:SetRoleUser){
+        const user = await this.userModel.findOne({where:{email:setRoleUser.email}});
+        const role = await this.roleService.roleWhatNeed(setRoleUser.role);
+        await user.$remove('roles', [role[0].id]);
         user.roles = role;
         return user;
     }

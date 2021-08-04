@@ -40,6 +40,15 @@ export class UserController {
         return this.userService.setUserRole(setRoleUser);
     }
 
+    @ApiOperation({summary:"Remove roles"})
+    @ApiResponse({status:200, type: [User]})
+    @Roles('admin')
+    @UseGuards(RoleGuard)
+    @Post('/removeRoleForUser')
+    removeRoles(@Body() setRoleUser:SetRoleUser){
+        return this.userService.deletUserRole(setRoleUser);
+    }
+
     @ApiOperation({summary:"Banned user"})
     @ApiResponse({status:200})
     @Roles('admin')
