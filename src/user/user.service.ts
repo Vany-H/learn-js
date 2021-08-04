@@ -3,11 +3,16 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
 import { FieldToCreateUserDto } from './dto/create.dto'
 import { RoleService } from 'src/role/role.service';
+import { UserRoles } from 'src/role/user-rols.model';
 
 @Injectable()
 export class UserService {
 
-    constructor (@InjectModel(User) private userModel: typeof User, private roleService: RoleService){}
+    constructor (
+        @InjectModel(User) private userModel: typeof User, 
+        private roleService: RoleService, 
+        @InjectModel(UserRoles) private userRoleModel: typeof UserRoles
+    ){}
 
     async createUser(dto:FieldToCreateUserDto){
         const user = await this.userModel.create(dto);
@@ -23,7 +28,14 @@ export class UserService {
     }
 
     async getUserEmail(email:string){
-        const user = await this.userModel.findOne({where:{email:email}});
+        const user = await this.userModel.findOne({
+            include:{
+                all:true
+            },
+            where:{
+                email:email
+            }
+        });
         return user;
     }
 }
